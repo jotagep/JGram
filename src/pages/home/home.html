@@ -1,14 +1,48 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="toolbar">
     <ion-title>
-      Ionic Blank
+      JGram
     </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="login()" *ngIf="!authenticated">
+        Login
+      </button>
+      <button ion-button (click)="logout()" color="danger" *ngIf="authenticated">
+        Logout
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+
+
+
+  <ion-card *ngFor="let post of _carga.imagenes">
+    <img [src]="post.img" alt="">
+    <ion-card-content>
+      <ion-card-title>
+        {{ post.titulo | uppercase }}
+      </ion-card-title>
+    </ion-card-content>
+    <ion-row>
+      <ion-col text-right>
+        <button ion-button clear small color="primary" icon-left (click)="compartir(post)">
+          <ion-icon name="share-alt"></ion-icon>
+          Compartir
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-fab bottom right *ngIf="authenticated">
+    <button ion-fab color="danger" (click)="mostrarModal()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-infinite-scroll (ionInfinite)="cargar_siguientes($event)" [enabled]="hayMas">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>

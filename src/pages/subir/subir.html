@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar color="toolbar">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="cerrarModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ titulo | placeholder:"Crear Post" }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="subirPost()" [disabled]="img.length < 2 || titulo.length < 2">
+        <ion-icon name="cloud-upload"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Titulo</ion-label>
+      <ion-input type="text" [(ngModel)]="titulo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <img *ngIf="imgPreview !== null" [src]="imgPreview" alt="">
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left block (click)="mostrarSeleccion()">
+            <ion-icon name="photos"></ion-icon>
+            Seleccionar
+          </button>
+        </ion-col>
+
+        <ion-col>
+          <button ion-button icon-left block (click)="mostrarCamara()">
+            <ion-icon name="camera"></ion-icon>
+              Camara
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>
